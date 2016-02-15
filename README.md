@@ -1,2 +1,2 @@
 # ftp_test
-Scripts that test the python ftplib and ftputil packages.
+Some programs that test the python ftplib and ftputil packages.
