@@ -121,7 +121,7 @@ class Decryptor_v2():
 
 if __name__ == '__main__':
 
-    password = b'TalenExp0rt!December2015'
+    password = b'xxxxxxxxxxx'
     start = time.time()
     with open('exportdata.csv.enc', 'rb') as in_file:
 

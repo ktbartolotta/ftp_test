@@ -90,7 +90,7 @@ def main():
 
     with ftputil.FTPHost(
                 host='ec2-52-21-101-249.compute-1.amazonaws.com',
-                user='Admin', password='8Q674nsPYk452FGt9ye5',
+                user='Admin', password='xxxxxxxxxxxxxxx',
                 session_factory=my_session
             ) as ftp:
 

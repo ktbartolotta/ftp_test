@@ -53,14 +53,14 @@ def main():
 
     start = time.time()
     out_dir = 'FNDecrypted'
-    password = b'TalenExp0rt!December2015'
+    password = b'xxxxxxxxxx'
 
     ftp = ftplib.FTP_TLS(timeout=10)
     ftp.connect('ec2-52-21-101-249.compute-1.amazonaws.com', port=21)
     ftp.auth()
     ftp.prot_p()
     ftp.login(
-        'Admin', '8Q674nsPYk452FGt9ye5')
+        'Admin', 'xxxxxxxxxx')
     ftp.set_debuglevel(0)
     ftp.cwd('Encrypted_Export')
     # test_file(ftp, 'B200226_37646-REN.TIF.enc', password)

@@ -78,7 +78,7 @@ def main():
 
     start = time.time()
     out_dir = '../../FNDecrypted_W_Decryptor'
-    password = b'TalenExp0rt!December2015'
+    password = b'xxxxxxxxxxxxx'
 
     # ftp = ftplib.FTP_TLS(timeout=10)
     # ftp.connect('ec2-52-21-101-249.compute-1.amazonaws.com', port=21)
@@ -88,7 +88,7 @@ def main():
     #     'Admin', '8Q674nsPYk452FGt9ye5')
     # ftp.set_debuglevel(0)
     with FTPSouth('ec2-52-21-101-249.compute-1.amazonaws.com',
-                  'Admin', '8Q674nsPYk452FGt9ye5', 10) as ftp:
+                  'Admin', 'xxxxxxxxxxxxx', 10) as ftp:
         ftp.cwd('Encrypted_Export')
         file_list = get_file_list(ftp)
         # metadata_files = get_csvs(ftp, file_list, password)
