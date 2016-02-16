@@ -19,7 +19,7 @@ def unpad(data_str):
     return data_str[0:-ord(data_str[-1])]
 
 
-def decrypt_file(data, out_file, password):
+def decrypt_file1(data, out_file, password):
 
     salt = data[:16]
     iv = data[16:32]
@@ -29,6 +29,40 @@ def decrypt_file(data, out_file, password):
     with open(out_file, 'wb') as out_file:
 
         out_file.write(unpad(dec_obj.decrypt(data[32:])))
+
+
+def decrypt_file(ftp, in_file_path, out_file_path, pwd):
+
+    try:
+        with ftp.open(in_file_path, 'rb') as input:
+            with open(out_file_path, 'wb') as output:
+                salt = input.read(16)
+                iv = input.read(16)
+                key = hashlib.pbkdf2_hmac('sha1', pwd, salt, 65536, 16)
+
+                block1 = input.read(16)
+                block2 = input.read(16)
+
+                dec_obj = AES.new(key, AES.MODE_CBC, iv)
+                content = dec_obj.decrypt(block1)
+                if block2 == '':
+                    output.write(unpad(content))
+                else:
+                    output.write(content)
+                    while True:
+
+                        iv = block1
+                        block1 = block2
+                        block2 = input.read(16)
+                        dec_obj = AES.new(key, AES.MODE_CBC, iv)
+                        content = dec_obj.decrypt(block1)
+                        if block2 != '':
+                            output.write(content)
+                        else:
+                            output.write(unpad(content))
+                            break
+    except Exception, e:
+        print(in_file_path, e)
 
 
 def get_file_data(ftp, file_name):
@@ -65,8 +99,7 @@ def main():
                 file_name = ftp.path.join(root, f)
                 print(file_name)
                 decrypt_file(
-                    get_file_data(ftp, file_name),
-                    os.path.join(out_dir, f[:-4]),
+                    ftp, file_name, os.path.join(out_dir, f[:-4]),
                     password)
 
             # file_name = r'Encrypted_Export/B200226_37646-REN.TIF.enc'
